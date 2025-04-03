@@ -1,0 +1,32 @@
+---
+import ClientRouter from "astro/components/ClientRouter.astro";
+import Navbar from "../components/Navbar/navbar";
+import Footer from "../components/footer";
+import "../styles/global.css";
+const { title } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="public/logocas.webp" />
+		<meta name="generator" content={Astro.generator} />
+		<ClientRouter />
+		<title>{ title ? `${title} | Castillo Real Hosteria` : "Castillo Real Hosteria" }</title>
+	</head>
+	<body>
+		<Navbar client:load />
+		<slot />
+		<Footer client:visible />
+	</body>
+</html>
+
+<style>
+	html,
+	body {
+		margin: 0;
+		width: 100%;
+		height: 100%;
+	}
+</style>
