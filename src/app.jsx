@@ -72,7 +72,7 @@ export default function Home() {
       description:
         "Espaciosa habitación con todas las comodidades para una estadía placentera en medio de la naturaleza.",
       price: "$120 / noche",
-      image: "/public/habitstandar.webp",
+      image: "/habitstandar.webp",
       features: [
         "TV Smart 4K",
         "Minibar",
@@ -445,12 +445,12 @@ export default function Home() {
           </div>
           <div className="grid grid-cols-2 gap-4">
             <img
-              src="/public/instalaciones.webp"
+              src="/instalaciones.webp"
               alt="Instalaciones"
               className="rounded-lg object-cover h-80 w-full"
             />
             <img
-              src="/public/jardines.webp"
+              src="/jardines.webp"
               alt="Jardines"
               className="rounded-lg object-cover h-80 w-full mt-8"
             />
@@ -460,7 +460,7 @@ export default function Home() {
               className="rounded-lg object-cover h-80 w-full"
             />
             <img
-              src="/public/habitaciones.webp"
+              src="/habitaciones.webp"
               alt="Habitación"
               className="rounded-lg object-cover h-80 w-full mt-8"
             />
