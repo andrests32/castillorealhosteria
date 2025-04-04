@@ -91,7 +91,7 @@ export default function Home() {
       description:
         "Nuestra suite más exclusiva, con amplios espacios, jacuzzi privado y vistas panorámicas al bosque.",
       price: "$280 / noche",
-      image: "/public/habitsuite.webp",
+      image: "/habitsuite.webp",
       features: [
         "Cama king size",
         "Jacuzzi privado",
@@ -112,7 +112,7 @@ export default function Home() {
       description:
         "Mayor espacio y comodidades adicionales para una experiencia superior en contacto con la naturaleza.",
       price: "$160 / noche",
-      image: "/public/habitdelux.webp",
+      image: "/habitdelux.webp",
       features: [
         "Cama queen size",
         "Área de trabajo",
@@ -181,7 +181,7 @@ export default function Home() {
       title: "Gastronomía",
       description:
         "Nuestro chef ejecutivo crea experiencias gastronómicas únicas utilizando ingredientes orgánicos de nuestra huerta y productores locales. Cada plato es una obra de arte que combina sabores tradicionales con técnicas modernas.",
-      image: "/public/gastronomia.jpeg",
+      image: "/gastronomia.jpeg",
       buttonText: "Ver Menú",
       buttonLink: "/restaurante",
       icon: <Leaf className="h-10 w-10 text-teal-700" />,
@@ -196,7 +196,7 @@ export default function Home() {
       title: "Relax & Bienestar Natural",
       description:
         "Relájese y rejuvenezca en nuestro spa con tratamientos que utilizan productos naturales, piscina climatizada, sauna y gimnasio completamente equipado. Nuestros terapeutas certificados le brindarán una experiencia de bienestar inolvidable.",
-      image: "/public/bienestar.jpeg",
+      image: "/bienestar.jpeg",
       buttonText: "Reservar",
       buttonLink: "/spa",
       icon: <Sparkles className="h-10 w-10 text-teal-700" />,

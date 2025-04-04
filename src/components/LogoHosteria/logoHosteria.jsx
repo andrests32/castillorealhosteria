@@ -1,5 +1,5 @@
 const LogoHosteria = ({
-  src = "/public/logocas.webp",
+  src = "/logocas.webp",
   alt = "logo hosteria castillo real",
   size = "h-20 w-20",
   className = ""
