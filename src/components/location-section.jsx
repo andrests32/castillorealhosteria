@@ -1,11 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { MapPin, Navigation, Clock, Phone } from "lucide-react";
+import { MapPin, Clock, Phone } from "lucide-react";
 
 export default function LocationSection() {
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-16 bg-gray-50 overflow-x-hidden">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -32,16 +32,14 @@ export default function LocationSection() {
             viewport={{ once: true }}
             className="md:col-span-2 bg-white rounded-xl overflow-hidden shadow-md"
           >
-            <div className="h-96 bg-gray-300 relative">
+            <div className="h-96 relative rounded-xl overflow-hidden">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7960.2989321071345!2d-78.86666!3d-3.989664!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91cb6d79af7ddac9%3A0x68b4f3eaa59bf51!2sHoster%C3%ADa%20Castillo%20Real%20Zamora%2C%20Hotel%2C%20Restaurante%2C%20Piscinas%2C%20Senderismo%20Zamora%2C%20Ecuador%2C%20Ancas%20de%20Rana%20y%20Tilapias.!5e0!3m2!1ses-419!2sus!4v1743696025894!5m2!1ses-419!2sus"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen=""
+                className="absolute inset-0 w-full h-full border-0"
+                allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                className="absolute inset-0 w-full h-full rounded-xl"
+                title="Ubicación en Google Maps"
               ></iframe>
             </div>
           </motion.div>
@@ -58,7 +56,7 @@ export default function LocationSection() {
 
             <div className="space-y-4">
               <div className="flex items-start">
-                <MapPin className="h-5 w-5 text-emerald-600 mt-1 mr-3" />
+                <MapPin className="h-5 w-5 text-emerald-600 mt-1 mr-3 flex-shrink-0" />
                 <div>
                   <p className="font-poppinsreg text-primary">Dirección</p>
                   <p className="text-gray-500 font-poppinslight">
@@ -68,7 +66,7 @@ export default function LocationSection() {
               </div>
 
               <div className="flex items-start">
-                <Clock className="h-5 w-5 text-emerald-600 mt-1 mr-3" />
+                <Clock className="h-5 w-5 text-emerald-600 mt-1 mr-3 flex-shrink-0" />
                 <div>
                   <p className="font-poppinsreg text-primary">Horarios</p>
                   <p className="text-gray-500 font-poppinslight">
@@ -79,7 +77,7 @@ export default function LocationSection() {
               </div>
 
               <div className="flex items-start">
-                <Phone className="h-5 w-5 text-emerald-600 mt-1 mr-3" />
+                <Phone className="h-5 w-5 text-emerald-600 mt-1 mr-3 flex-shrink-0" />
                 <div>
                   <p className="font-poppinsreg text-primary">Teléfono</p>
                   <p className="text-gray-600 font-poppinslight">+593 9875654 321</p>

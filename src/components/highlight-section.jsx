@@ -14,15 +14,16 @@ export default function HighlightSection({
   reverse = false,
 }) {
   return (
-    <section className="py-16 bg-teal-50">
+    <section className="py-16 bg-teal-50 overflow-x-hidden">
       <div className="container mx-auto px-4">
-        <div className={`grid grid-cols-1 md:grid-cols-2 gap-8 items-center ${reverse ? "md:flex-row-reverse" : ""}`}>
+        <div className={`grid grid-cols-1 md:grid-cols-2 gap-8 items-center`}>
+          {/* Texto + contenido */}
           <motion.div
             initial={{ opacity: 0, x: reverse ? 50 : -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className={reverse ? "order-1 md:order-2" : ""}
+            className={`${reverse ? "md:order-2" : "md:order-1"}`}
           >
             <div className="flex items-center mb-4">
               {icon}
@@ -57,16 +58,22 @@ export default function HighlightSection({
               </a>
             </motion.div>
           </motion.div>
+
+          {/* Imagen */}
           <motion.div
             initial={{ opacity: 0, x: reverse ? -50 : 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className={reverse ? "order-2 md:order-1" : ""}
+            className={`${reverse ? "md:order-1" : "md:order-2"}`}
           >
             <div className="relative h-80 md:h-96 overflow-hidden rounded-xl">
               <motion.div whileHover={{ scale: 1.05 }} transition={{ duration: 0.5 }}>
-                <img src={image || "/placeholder.svg"} alt={title} className="w-full h-full object-cover" />
+                <img
+                  src={image || "/placeholder.svg"}
+                  alt={title}
+                  className="w-full h-full object-cover"
+                />
               </motion.div>
             </div>
           </motion.div>
@@ -75,4 +82,3 @@ export default function HighlightSection({
     </section>
   )
 }
-

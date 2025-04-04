@@ -57,7 +57,7 @@ export default function HeroSection({
         <img
           src={imageUrl || "/public/hcrnight.webp"}
           alt={title}
-          className="object-cover object-center h-auto w-full"
+          className="object-cover object-center h-full w-full"
         />
       </motion.div>
       <div className="absolute inset-0 bg-black/20 z-10" />
@@ -85,7 +85,7 @@ export default function HeroSection({
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.5 }}
-                  className="font-cinzelsmb bg-gradient-to-r from-transparent via-gray-50/20 to-transparent bottom-0 text-white text-xl md:text-3xl tracking-[0.5em] md:tracking-[0.8em] lg:tracking-[1.2em] uppercase py-2 px-4 text-center inline-block text-shadow-md"
+                  className="font-cinzelsmb bg-gradient-to-r from-transparent via-gray-50/20 to-transparent bottom-0 text-white text-md md:text-3xl tracking-[0.5em] md:tracking-[0.8em] lg:tracking-[1.2em] uppercase py-2 px-4 text-center inline-block text-shadow-md"
                 >
                   <span className="inline-block ml-[0.5em] md:ml-[0.8em] lg:ml-[1.2em]">
                     {rotatingTexts[currentTextIndex]}
