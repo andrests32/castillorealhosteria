@@ -103,7 +103,7 @@ export default function ServicesSection() {
       description:
         "Refrescantes piscinas para adultos y niños donde podrás relajarte y disfrutar del sol en un entorno paradisíaco.",
       icon: <Waves className="h-8 w-8" />,
-      image: "public/piscinas.webp",
+      image: "/piscinas.webp",
       features: [
         { text: "Piscina para adultos", icon: <Swim className="h-5 w-5" /> },
         { text: "Piscina infantil", icon: <Waves className="h-5 w-5" /> },
@@ -167,7 +167,7 @@ export default function ServicesSection() {
         >
           <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/5 to-black/5 z-10" />
           <img
-            src="public/areas verdes.webp"
+            src="/areas verdes.webp"
             alt="Luxury background"
             fill
             priority
