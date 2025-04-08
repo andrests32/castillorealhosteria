@@ -1,150 +1,175 @@
-import { motion } from 'framer-motion';
-import { ArrowLeft, ZoomIn, Heart, Share2 } from 'lucide-react';
-import { useState } from 'react';
+"use client"
 
-const images = [
+import { useState, useRef } from "react"
+import { motion, AnimatePresence, useInView } from "framer-motion"
+import { X, ChevronLeft, ChevronRight } from "lucide-react"
+
+// Sample gallery images
+const galleryImages = [
   {
-    url: "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&q=80",
-    title: "Castillo Real Hostería",
-    category: "Hospedaje",
-    likes: 234
+    src: "/images/hosteria-1.jpg",
+    alt: "Fachada principal de Castillo Real Hostería",
   },
   {
-    url: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&q=80",
-    title: "Bosque Protector",
-    category: "Naturaleza",
-    likes: 186
+    src: "/images/hosteria-2.jpg",
+    alt: "Suite de lujo con vista panorámica",
   },
   {
-    url: "https://images.unsplash.com/photo-1498429152472-9a433d9ddf3b?auto=format&fit=crop&q=80",
-    title: "Cascadas Naturales",
-    category: "Aventura",
-    likes: 312
+    src: "/images/hosteria-3.jpg",
+    alt: "Restaurante gourmet con decoración elegante",
   },
   {
-    url: "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&q=80",
-    title: "Mirador Turístico",
-    category: "Paisajes",
-    likes: 275
+    src: "/images/hosteria-4.jpg",
+    alt: "Piscina infinity con vista a las montañas",
   },
   {
-    url: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&q=80",
-    title: "Valle de Cumbaratza",
-    category: "Paisajes",
-    likes: 198
+    src: "/images/hosteria-5.jpg",
+    alt: "Salón de eventos para celebraciones especiales",
   },
   {
-    url: "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&q=80",
-    title: "Atardecer en la Amazonía",
-    category: "Naturaleza",
-    likes: 423
+    src: "/images/hosteria-6.jpg",
+    alt: "Habitación premium con cama king size",
+  },
+  {
+    src: "/images/hosteria-7.jpg",
+    alt: "Área de spa y bienestar",
+  },
+  {
+    src: "/images/hosteria-8.jpg",
+    alt: "Jardines y áreas verdes",
+  },
+]
+
+export default function Gallery({ images = galleryImages }) {
+  const [selectedImage, setSelectedImage] = useState(null)
+
+  const openLightbox = (index) => {
+    setSelectedImage(index)
+    document.body.style.overflow = "hidden"
   }
-];
 
-const categories = ["Todos", "Hospedaje", "Naturaleza", "Aventura", "Paisajes"];
+  const closeLightbox = () => {
+    setSelectedImage(null)
+    document.body.style.overflow = "auto"
+  }
 
-export default function PhotoGallery() {
-  const [selectedCategory, setSelectedCategory] = useState("Todos");
-  const [hoveredImage, setHoveredImage] = useState(null);
-
-  const filteredImages = selectedCategory === "Todos" 
-    ? images 
-    : images.filter(img => img.category === selectedCategory);
+  const navigateImage = (direction) => {
+    const newIndex = selectedImage + direction
+    if (newIndex >= 0 && newIndex < images.length) {
+      setSelectedImage(newIndex)
+    }
+  }
 
   return (
-    <div className="min-h-screen bg-black">
-      {/* Header */}
-      <div className="bg-gradient-to-b from-gray-900 to-black py-8">
-        <div className="container mx-auto px-8">
-          <div className="flex justify-between items-center mb-12">
-            <div>
-              <h1 className="text-4xl font-bold text-white mb-4">
-                Galería Fotográfica
-              </h1>
-              <p className="text-gray-400">
-                Explora la belleza de Cumbaratza a través de nuestras imágenes
-              </p>
-            </div>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-full backdrop-blur-sm transition-colors"
-            >
-              <Share2 className="w-5 h-5" />
-            </motion.button>
-          </div>
-
-          {/* Categories */}
-          <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
-            {categories.map((category) => (
-              <motion.button
-                key={category}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => setSelectedCategory(category)}
-                className={`px-6 py-2 rounded-full transition-colors ${
-                  selectedCategory === category
-                    ? "bg-white text-black"
-                    : "bg-white/10 text-white hover:bg-white/20"
-                }`}
-              >
-                {category}
-              </motion.button>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Gallery Grid */}
-      <div className="container mx-auto px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredImages.map((image, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="relative aspect-square group"
-              onHoverStart={() => setHoveredImage(index)}
-              onHoverEnd={() => setHoveredImage(null)}
-            >
-              <motion.img
-                src={image.url}
-                alt={image.title}
-                className="w-full h-full object-cover rounded-2xl"
-                whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.3 }}
-              />
-              
-              {/* Overlay */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: hoveredImage === index ? 1 : 0 }}
-                className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent rounded-2xl"
-              >
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <h3 className="text-white text-xl font-semibold mb-2">
-                    {image.title}
-                  </h3>
-                  <div className="flex items-center justify-between">
-                    <span className="text-gray-300 text-sm">
-                      {image.category}
-                    </span>
-                    <div className="flex items-center gap-4">
-                      <button className="text-white hover:text-red-500 transition-colors">
-                        <Heart className="w-5 h-5" />
-                      </button>
-                      <button className="text-white hover:text-blue-400 transition-colors">
-                        <ZoomIn className="w-5 h-5" />
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            </motion.div>
+    <section className="w-full bg-white py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {images.map((image, index) => (
+            <ImageCard key={index} image={image} index={index} onClick={() => openLightbox(index)} />
           ))}
         </div>
       </div>
-    </div>
-  );
+
+      {/* Minimalist Lightbox */}
+      <AnimatePresence>
+        {selectedImage !== null && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center"
+            onClick={closeLightbox}
+          >
+            <motion.button
+              className="absolute top-6 right-6 text-white/80 hover:text-white p-2 z-10"
+              onClick={(e) => {
+                e.stopPropagation()
+                closeLightbox()
+              }}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <X className="h-8 w-8" />
+            </motion.button>
+
+            <motion.button
+              className="absolute left-6 text-white/80 hover:text-white p-2 z-10"
+              onClick={(e) => {
+                e.stopPropagation()
+                navigateImage(-1)
+              }}
+              disabled={selectedImage === 0}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              style={{ opacity: selectedImage === 0 ? 0.3 : 1 }}
+            >
+              <ChevronLeft className="h-8 w-8" />
+            </motion.button>
+
+            <motion.button
+              className="absolute right-6 text-white/80 hover:text-white p-2 z-10"
+              onClick={(e) => {
+                e.stopPropagation()
+                navigateImage(1)
+              }}
+              disabled={selectedImage === images.length - 1}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              style={{ opacity: selectedImage === images.length - 1 ? 0.3 : 1 }}
+            >
+              <ChevronRight className="h-8 w-8" />
+            </motion.button>
+
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={selectedImage}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.3 }}
+                className="w-full max-w-6xl h-[85vh] relative"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <img
+                  src={images[selectedImage]?.src || "/placeholder.svg"}
+                  alt={images[selectedImage]?.alt}
+                  className="w-full h-full object-contain"
+                />
+              </motion.div>
+            </AnimatePresence>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </section>
+  )
+}
+
+function ImageCard({ image, index, onClick }) {
+  const cardRef = useRef(null)
+  const isInView = useInView(cardRef, { once: true, amount: 0.2 })
+
+  return (
+    <motion.div
+      ref={cardRef}
+      initial={{ opacity: 0, y: 30 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.6, delay: index * 0.1 }}
+      className="aspect-[4/3] overflow-hidden"
+    >
+      <motion.div
+        className="w-full h-full relative cursor-pointer"
+        whileHover={{ scale: 1.03 }}
+        transition={{ duration: 0.3 }}
+        onClick={onClick}
+      >
+        <img src={image.src || "/placeholder.svg"} alt={image.alt} className="w-full h-full object-cover" />
+        <motion.div
+          className="absolute inset-0 bg-black/0"
+          whileHover={{ backgroundColor: "rgba(0, 0, 0, 0.2)" }}
+          transition={{ duration: 0.3 }}
+        />
+      </motion.div>
+    </motion.div>
+  )
 }

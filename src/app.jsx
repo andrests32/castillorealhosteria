@@ -1,5 +1,5 @@
 "use client";
-
+import { motion } from "framer-motion"
 import { useState, useRef } from "react";
 import {
   ChevronRight,
@@ -47,24 +47,43 @@ export default function Home() {
     {
       title: "WiFi Gratis",
       icon: <Wifi className="h-5 w-5 text-emerald-500" />,
-      description: "Conexión de alta velocidad en todas las áreas"
+      description: "Conexión de alta velocidad en todas las áreas",
     },
     {
       title: "Restaurante Orgánico",
       icon: <Utensils className="h-5 w-5 text-emerald-500" />,
-      description: "Ingredientes frescos de nuestra huerta"
+      description: "Ingredientes frescos de nuestra huerta",
     },
     {
       title: "Ubicación Privilegiada",
       icon: <MapPin className="h-5 w-5 text-emerald-500" />,
-      description: "Entorno natural con vistas espectaculares"
+      description: "Entorno natural con vistas espectaculares",
     },
     {
       title: "Servicio 24/7",
       icon: <Clock className="h-5 w-5 text-emerald-500" />,
-      description: "Atención personalizada a cualquier hora"
+      description: "Atención personalizada a cualquier hora",
     }
   ];
+
+  const featuresImage = [
+    {
+      image: "/instalaciones.webp",
+      alt: "Restaurante"
+    },
+    {
+      image: "/jardines.webp",
+      alt: "Jardines"
+    },
+    {
+      image: "/restaurante.webp",
+      alt: "Instalaciones"
+    },
+    {
+      image: "/habitaciones.webp",
+      alt: "Habitaciones"
+    }
+  ]
 
   const rooms = [
     {
@@ -181,7 +200,7 @@ export default function Home() {
       title: "Gastronomía",
       description:
         "Nuestro chef ejecutivo crea experiencias gastronómicas únicas utilizando ingredientes orgánicos de nuestra huerta y productores locales. Cada plato es una obra de arte que combina sabores tradicionales con técnicas modernas.",
-      image: "/gastronomia.jpeg",
+      image: "/gastronomia.webp",
       buttonText: "Ver Menú",
       buttonLink: "/restaurante",
       icon: <Leaf className="h-10 w-10 text-teal-700" />,
@@ -196,7 +215,7 @@ export default function Home() {
       title: "Relax & Bienestar Natural",
       description:
         "Relájese y rejuvenezca en nuestro spa con tratamientos que utilizan productos naturales, piscina climatizada, sauna y gimnasio completamente equipado. Nuestros terapeutas certificados le brindarán una experiencia de bienestar inolvidable.",
-      image: "/bienestar.jpeg",
+      image: "/bienestar.webp",
       buttonText: "Reservar",
       buttonLink: "/spa",
       icon: <Sparkles className="h-10 w-10 text-teal-700" />,
@@ -443,7 +462,11 @@ export default function Home() {
               ))}
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+            className="grid grid-cols-2 gap-4">
             <img
               src="/instalaciones.webp"
               alt="Instalaciones"
@@ -464,7 +487,7 @@ export default function Home() {
               alt="Habitación"
               className="rounded-lg object-cover h-80 w-full mt-8"
             />
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -481,7 +504,11 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <motion.div 
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {activities.map((activity, index) => (
               <div
                 key={index}
@@ -510,7 +537,7 @@ export default function Home() {
                 </div>
               </div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -584,9 +611,8 @@ export default function Home() {
                 <button
                   key={index}
                   onClick={() => setActiveIndex(index)}
-                  className={`w-3 h-3 rounded-full ${
-                    index === activeIndex ? "bg-emerald-700" : "bg-emerald-100"
-                  }`}
+                  className={`w-3 h-3 rounded-full ${index === activeIndex ? "bg-emerald-700" : "bg-emerald-100"
+                    }`}
                   aria-label={`Ver testimonio ${index + 1}`}
                 />
               ))}
@@ -610,7 +636,7 @@ export default function Home() {
         secondaryButtonText="Contactar"
         secondaryButtonLink="/contacto"
       />
-   
+
     </div>
   );
 }

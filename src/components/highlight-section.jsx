@@ -14,7 +14,7 @@ export default function HighlightSection({
   reverse = false,
 }) {
   return (
-    <section className="py-16 bg-teal-50 overflow-x-hidden">
+    <section className="py-16 bg-green-50 overflow-x-hidden">
       <div className="container mx-auto px-4">
         <div className={`grid grid-cols-1 md:grid-cols-2 gap-8 items-center`}>
           {/* Texto + contenido */}
@@ -72,7 +72,7 @@ export default function HighlightSection({
                 <img
                   src={image || "/placeholder.svg"}
                   alt={title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover object-center"
                 />
               </motion.div>
             </div>

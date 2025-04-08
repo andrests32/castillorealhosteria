@@ -6,7 +6,7 @@ const LogoHosteria = ({
 }) => {
   return (
     <div
-      className={`flex items-center justify-center mr-2 ${size} ${className}`}
+      className={`flex hidden items-center justify-center mr-2 lg:block ${size} ${className}`}
     >
       <img src={src} alt={alt} />
     </div>

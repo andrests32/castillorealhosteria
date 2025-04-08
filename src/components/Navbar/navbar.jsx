@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X, Home, Map, Image, Mail, Calendar } from "lucide-react"
+import { Menu, X, Home, Map, Image, Mail, Calendar, Instagram, Facebook, Twitter, Youtube } from "lucide-react"
 import LogoHosteria from "../LogoHosteria/logoHosteria"
 
 export default function Navbar() {
@@ -25,6 +25,19 @@ export default function Navbar() {
       window.removeEventListener("scroll", handleScroll)
     }
   }, [])
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = "auto"
+    }
+
+    return () => {
+      document.body.style.overflow = "auto"
+    }
+  }, [mobileMenuOpen])
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen)
@@ -50,7 +63,8 @@ export default function Navbar() {
           <div className="flex justify-between items-center">
             {/* Logo */}
             <a href="/" className="flex items-center">
-              <LogoHosteria />
+              <LogoHosteria 
+               />
             </a>
 
             {/* Desktop Navigation */}
@@ -70,13 +84,13 @@ export default function Navbar() {
                 ></span>
               </a>
               <a
-                href="/turismo"
+                href="/services"
                 className={`font-poppinsmd group flex items-center gap-1.5 transition-colors duration-300 ${
                   isScrolled ? "text-white hover:text-pyellow" : "text-white hover:text-pyellow"
                 }`}
               >
                 <Map className="w-5 h-5" />
-                <span>Turismo</span>
+                <span>Servicios</span>
                 <span
                   className={`block h-0.5 w-0 group-hover:w-full transition-all duration-300 ease-in-out ${
                     isScrolled ? "bg-pyellow" : "bg-pyellow"
@@ -98,7 +112,7 @@ export default function Navbar() {
                 ></span>
               </a>
               <a
-                href="/contacto"
+                href="/contact"
                 className={`font-poppinsmd group flex items-center gap-1.5 transition-colors duration-300 ${
                   isScrolled ? "text-white hover:text-pyellow" : "text-white hover:text-pyellow"
                 }`}
@@ -129,12 +143,12 @@ export default function Navbar() {
             </div>
 
             {/* Mobile Menu Button */}
-            <button className="md:hidden relative z-50" onClick={toggleMobileMenu} aria-label="Menu">
-              {mobileMenuOpen ? (
-                <X className={`h-6 w-6 ${isScrolled ? "text-pyellow" : "text-white"}`} />
-              ) : (
-                <Menu className={`h-6 w-6 ${isScrolled ? "text-pyellow" : "text-white"}`} />
-              )}
+            <button
+              className="md:hidden relative z-50 w-10 h-10 flex items-center justify-center transition duration-500"
+              onClick={toggleMobileMenu}
+              aria-label="Menu"
+            >
+              {mobileMenuOpen ? <X className="h-6 w-6 text-pyellow" /> : <Menu className="h-6 w-6 text-white" />}
             </button>
           </div>
         </div>
@@ -143,63 +157,98 @@ export default function Navbar() {
       {/* Mobile Menu */}
       <AnimatePresence>
         {mobileMenuOpen && (
-          <motion.div
-            className="fixed inset-0 bg-gradient-to-b from-moss/95 to-primary/95 backdrop-blur-md z-40 pt-20 px-4 overflow-y-auto"
-            initial={{ opacity: 0, x: "100%" }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: "100%" }}
-            transition={{ duration: 0.3 }}
-          >
-            <nav className="flex flex-col space-y-6 text-center">
-              <a
-                href="/"
-                className="text-xl font-poppinsmd text-pyellow hover:text-white py-2 flex items-center justify-center gap-3 transition-colors relative group"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                <Home className="w-6 h-6" />
-                <span>Inicio</span>
-                <span className="absolute -bottom-1 left-1/2 w-0 h-0.5 bg-white group-hover:w-24 group-hover:left-1/2 group-hover:-translate-x-1/2 transition-all duration-300"></span>
-              </a>
-              <a
-                href="/turismo"
-                className="text-xl font-poppinsmd text-pyellow hover:text-white py-2 flex items-center justify-center gap-3 transition-colors relative group"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                <Map className="w-6 h-6" />
-                <span>Turismo</span>
-                <span className="absolute -bottom-1 left-1/2 w-0 h-0.5 bg-white group-hover:w-24 group-hover:left-1/2 group-hover:-translate-x-1/2 transition-all duration-300"></span>
-              </a>
-              <a
-                href="/galeria"
-                className="text-xl font-poppinsmd text-pyellow hover:text-white py-2 flex items-center justify-center gap-3 transition-colors relative group"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                <Image className="w-6 h-6" />
-                <span>Galería</span>
-                <span className="absolute -bottom-1 left-1/2 w-0 h-0.5 bg-white group-hover:w-24 group-hover:left-1/2 group-hover:-translate-x-1/2 transition-all duration-300"></span>
-              </a>
-              <a
-                href="/contacto"
-                className="text-xl font-poppinsmd text-pyellow hover:text-white py-2 flex items-center justify-center gap-3 transition-colors relative group"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                <Mail className="w-6 h-6" />
-                <span>Contacto</span>
-                <span className="absolute -bottom-1 left-1/2 w-0 h-0.5 bg-white group-hover:w-24 group-hover:left-1/2 group-hover:-translate-x-1/2 transition-all duration-300"></span>
-              </a>
+          <>
+            {/* Backdrop */}
+            <motion.div
+              className="fixed inset-0 bg-black/30 backdrop-blur-sm z-40"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={toggleMobileMenu}
+            />
 
-              <div className="pt-6">
-                <a
-                  href="/reservar"
-                  className="text-xl font-poppinsmd bg-pyellow text-primary hover:bg-white hover:text-moss py-3 px-8 rounded-md inline-flex items-center gap-2 transition-all duration-300 hover:shadow-lg"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  <Calendar className="w-6 h-6" />
-                  <span>Reservar Ahora</span>
-                </a>
+            {/* Menu Panel */}
+            <motion.div
+              className="fixed inset-y-0 right-0 w-4/5 max-w-sm bg-emerald-700 z-50 shadow-xl"
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ ease: "easeOut", duration: 0.3 }}
+            >
+              <div className="flex flex-col h-full">
+                {/* Logo area */}
+                <div className="flex justify-center items-center py-6 border-b border-white/10">
+                  <LogoHosteria />
+                </div>
+
+                {/* Navigation */}
+                <nav className="flex flex-col py-6">
+                  <a
+                    href="/"
+                    className="text-lg font-poppinsreg text-white py-3 px-8 flex items-center gap-3 hover:bg-white/5 transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <Home className="w-5 h-5 text-pyellow" />
+                    <span>Inicio</span>
+                  </a>
+                  <a
+                    href="/services"
+                    className="text-lg font-poppinsmd text-white py-3 px-8 flex items-center gap-3 hover:bg-white/5 transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <Map className="w-5 h-5 text-pyellow" />
+                    <span>Servicios</span>
+                  </a>
+                  <a
+                    href="/galeria"
+                    className="text-lg font-poppinsmd text-white py-3 px-8 flex items-center gap-3 hover:bg-white/5 transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <Image className="w-5 h-5 text-pyellow" />
+                    <span>Galería</span>
+                  </a>
+                  <a
+                    href="/contact"
+                    className="text-lg font-poppinsmd text-white py-3 px-8 flex items-center gap-3 hover:bg-white/5 transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <Mail className="w-5 h-5 text-pyellow" />
+                    <span>Contacto</span>
+                  </a>
+                </nav>
+
+                {/* Reservation Button */}
+                <div className="px-8 py-6 mt-auto">
+                  <a
+                    href="/reservar"
+                    className="w-full text-lg font-poppinsmd bg-pyellow text-primary hover:bg-white hover:text-moss py-3 rounded-md flex items-center justify-center gap-2 transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <Calendar className="w-5 h-5" />
+                    <span>Reservar Ahora</span>
+                  </a>
+                </div>
+
+                {/* Social Media */}
+                <div className="px-8 py-6 border-t border-white/10">
+                  <div className="flex justify-between">
+                    <a href="#" className="text-white hover:text-pyellow transition-colors" aria-label="Instagram">
+                      <Instagram className="w-6 h-6" />
+                    </a>
+                    <a href="#" className="text-white hover:text-pyellow transition-colors" aria-label="Facebook">
+                      <Facebook className="w-6 h-6" />
+                    </a>
+                    <a href="#" className="text-white hover:text-pyellow transition-colors" aria-label="Twitter">
+                      <Twitter className="w-6 h-6" />
+                    </a>
+                    <a href="#" className="text-white hover:text-pyellow transition-colors" aria-label="YouTube">
+                      <Youtube className="w-6 h-6" />
+                    </a>
+                  </div>
+                </div>
               </div>
-            </nav>
-          </motion.div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </>
