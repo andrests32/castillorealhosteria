@@ -101,11 +101,10 @@ const Footer = () => {
             <ul className="space-y-3 text-gray-100 font-poppinslight columns-2">
               {[
                 { name: "Inicio", path: "/" },
-                { name: "Turismo", path: "/turismo" },
+                { name: "Servicios", path: "/services" },
                 { name: "Galería", path: "/galeria" },
-                { name: "Contacto", path: "/contacto" },
+                { name: "Contacto", path: "/contact" },
                 { name: "Habitaciones", path: "/habitaciones" },
-                { name: "Servicios", path: "/servicios" }
               ].map((link, index) => (
                 <motion.li key={index}>
                   <a
